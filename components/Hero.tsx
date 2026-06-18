@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, FolderGit2, Mail } from "lucide-react";
+import { ArrowRight, Download, Mail } from "lucide-react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -68,13 +68,12 @@ export default function HeroCinematic() {
             </Link>
 
             <a
-              href={siteConfig.github.url}
-              target="_blank"
-              rel="noreferrer"
+              href={siteConfig.cv.href}
+              download={siteConfig.cv.fileName}
               className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-white/15 bg-white/10 px-6 py-3 text-sm font-semibold text-white backdrop-blur transition hover:-translate-y-0.5 hover:bg-white/15 focus:outline-none focus:ring-2 focus:ring-amber-300"
             >
-              <FolderGit2 size={18} aria-hidden="true" />
-              View GitHub
+              <Download size={18} aria-hidden="true" />
+              {siteConfig.cv.label}
             </a>
           </motion.div>
 

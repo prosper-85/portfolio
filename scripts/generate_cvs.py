@@ -25,6 +25,7 @@ CONTACT = {
     "location": "Lagos, Nigeria - Available for relocation",
     "linkedin": "linkedin.com/in/oluwatobi3685",
     "github": "github.com/prosper-85",
+    "portfolio": "prosper-01.netlify.app",
 }
 
 
@@ -201,7 +202,7 @@ SUMMARY = {
 }
 
 
-def set_run_font(run, size=10, bold=None, color=TEXT, name="Calibri"):
+def set_run_font(run, size=9, bold=None, color=TEXT, name="Arial"):
     run.font.name = name
     run._element.rPr.rFonts.set(qn("w:ascii"), name)
     run._element.rPr.rFonts.set(qn("w:hAnsi"), name)
@@ -217,7 +218,7 @@ def set_paragraph_spacing(paragraph, before=0, after=3, line_spacing=1.05):
     paragraph.paragraph_format.line_spacing = line_spacing
 
 
-def add_hyperlink(paragraph, text, url):
+def add_hyperlink(paragraph, text, url, size=8.4):
     part = paragraph.part
     r_id = part.relate_to(
         url,
@@ -228,6 +229,13 @@ def add_hyperlink(paragraph, text, url):
     hyperlink.set(qn("r:id"), r_id)
     run_element = OxmlElement("w:r")
     r_pr = OxmlElement("w:rPr")
+    fonts = OxmlElement("w:rFonts")
+    fonts.set(qn("w:ascii"), "Arial")
+    fonts.set(qn("w:hAnsi"), "Arial")
+    r_pr.append(fonts)
+    sz = OxmlElement("w:sz")
+    sz.set(qn("w:val"), str(int(size * 2)))
+    r_pr.append(sz)
     color = OxmlElement("w:color")
     color.set(qn("w:val"), "1F4D78")
     r_pr.append(color)
@@ -245,24 +253,24 @@ def add_hyperlink(paragraph, text, url):
 def configure_styles(doc):
     styles = doc.styles
     normal = styles["Normal"]
-    normal.font.name = "Calibri"
-    normal._element.rPr.rFonts.set(qn("w:ascii"), "Calibri")
-    normal._element.rPr.rFonts.set(qn("w:hAnsi"), "Calibri")
-    normal.font.size = Pt(10)
+    normal.font.name = "Arial"
+    normal._element.rPr.rFonts.set(qn("w:ascii"), "Arial")
+    normal._element.rPr.rFonts.set(qn("w:hAnsi"), "Arial")
+    normal.font.size = Pt(9.7)
     normal.font.color.rgb = TEXT
-    normal.paragraph_format.space_after = Pt(3)
-    normal.paragraph_format.line_spacing = 1.05
+    normal.paragraph_format.space_after = Pt(2)
+    normal.paragraph_format.line_spacing = 1.06
 
-    for style_name, size in [("Heading 1", 11), ("Heading 2", 10.5)]:
+    for style_name, size in [("Heading 1", 10.8), ("Heading 2", 10.2)]:
         style = styles[style_name]
-        style.font.name = "Calibri"
-        style._element.rPr.rFonts.set(qn("w:ascii"), "Calibri")
-        style._element.rPr.rFonts.set(qn("w:hAnsi"), "Calibri")
+        style.font.name = "Arial"
+        style._element.rPr.rFonts.set(qn("w:ascii"), "Arial")
+        style._element.rPr.rFonts.set(qn("w:hAnsi"), "Arial")
         style.font.size = Pt(size)
         style.font.bold = True
         style.font.color.rgb = ACCENT
         style.paragraph_format.space_before = Pt(7)
-        style.paragraph_format.space_after = Pt(3)
+        style.paragraph_format.space_after = Pt(2.5)
         style.paragraph_format.keep_with_next = True
 
 
@@ -283,30 +291,33 @@ def add_header(doc, variant):
 
     p = doc.add_paragraph()
     p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    set_paragraph_spacing(p, after=1)
+    set_paragraph_spacing(p, after=0)
     run = p.add_run(CONTACT["name"])
     set_run_font(run, size=17, bold=True, color=RGBColor(0, 0, 0))
 
     p = doc.add_paragraph()
     p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    set_paragraph_spacing(p, after=2)
+    set_paragraph_spacing(p, after=0)
     run = p.add_run(title)
     set_run_font(run, size=10.5, bold=True, color=ACCENT)
 
     p = doc.add_paragraph()
     p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    set_paragraph_spacing(p, after=1)
+    set_paragraph_spacing(p, after=0)
     contact_text = f"{CONTACT['email']} | {CONTACT['phone']} | {CONTACT['location']}"
     run = p.add_run(contact_text)
-    set_run_font(run, size=9, color=MUTED)
+    set_run_font(run, size=9.1, color=MUTED)
 
     p = doc.add_paragraph()
     p.alignment = WD_ALIGN_PARAGRAPH.CENTER
     set_paragraph_spacing(p, after=5)
-    add_hyperlink(p, CONTACT["linkedin"], f"https://{CONTACT['linkedin']}")
+    add_hyperlink(p, CONTACT["linkedin"], f"https://{CONTACT['linkedin']}", size=9.1)
     run = p.add_run(" | ")
-    set_run_font(run, size=9, color=MUTED)
-    add_hyperlink(p, CONTACT["github"], f"https://{CONTACT['github']}")
+    set_run_font(run, size=9.1, color=MUTED)
+    add_hyperlink(p, CONTACT["github"], f"https://{CONTACT['github']}", size=9.1)
+    run = p.add_run(" | ")
+    set_run_font(run, size=9.1, color=MUTED)
+    add_hyperlink(p, CONTACT["portfolio"], f"https://{CONTACT['portfolio']}", size=9.1)
     add_rule(p)
 
 
@@ -318,7 +329,7 @@ def add_section(doc, title):
 
 def add_body_paragraph(doc, text):
     p = doc.add_paragraph()
-    set_paragraph_spacing(p, after=4, line_spacing=1.08)
+    set_paragraph_spacing(p, after=4, line_spacing=1.1)
     run = p.add_run(text)
     set_run_font(run, size=9.6)
     return p
@@ -328,41 +339,37 @@ def add_bullet(doc, text):
     p = doc.add_paragraph(style="List Bullet")
     p.paragraph_format.left_indent = Inches(0.22)
     p.paragraph_format.first_line_indent = Inches(-0.12)
-    set_paragraph_spacing(p, after=2, line_spacing=1.04)
+    set_paragraph_spacing(p, after=1.6, line_spacing=1.06)
     run = p.add_run(text)
-    set_run_font(run, size=9.3)
+    set_run_font(run, size=9)
     return p
 
 
 def add_role(doc, role, company, dates, bullets):
     p = doc.add_paragraph()
-    set_paragraph_spacing(p, before=2, after=0)
+    set_paragraph_spacing(p, before=2, after=0.5)
     run = p.add_run(role)
-    set_run_font(run, size=10, bold=True, color=RGBColor(0, 0, 0))
+    set_run_font(run, size=9.7, bold=True, color=RGBColor(0, 0, 0))
     run = p.add_run(f" | {company} | {dates}")
-    set_run_font(run, size=9.5, color=MUTED)
+    set_run_font(run, size=9.1, color=MUTED)
     for bullet in bullets:
         add_bullet(doc, bullet)
 
 
 def add_project(doc, project):
     p = doc.add_paragraph()
-    set_paragraph_spacing(p, before=2, after=0)
+    set_paragraph_spacing(p, before=2, after=0.5)
     run = p.add_run(project["name"])
-    set_run_font(run, size=10, bold=True, color=RGBColor(0, 0, 0))
+    set_run_font(run, size=9.7, bold=True, color=RGBColor(0, 0, 0))
     run = p.add_run(f" | {project['meta']}")
-    set_run_font(run, size=9, color=MUTED)
+    set_run_font(run, size=8.9, color=MUTED)
     for point in project["points"]:
         add_bullet(doc, point)
 
 
 def add_footer(section, variant):
     footer = section.footer.paragraphs[0]
-    footer.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    run = footer.add_run(
-        "Mobile Engineer CV" if variant == "mobile" else "Web / Frontend Engineer CV"
-    )
-    set_run_font(run, size=8, color=MUTED)
+    footer.text = ""
 
 
 def build_cv(variant):
@@ -371,12 +378,12 @@ def build_cv(variant):
     section.start_type = WD_SECTION.NEW_PAGE
     section.page_width = Inches(8.5)
     section.page_height = Inches(11)
-    section.top_margin = Inches(0.62)
-    section.bottom_margin = Inches(0.58)
-    section.left_margin = Inches(0.68)
-    section.right_margin = Inches(0.68)
-    section.header_distance = Inches(0.3)
-    section.footer_distance = Inches(0.3)
+    section.top_margin = Inches(0.42)
+    section.bottom_margin = Inches(0.36)
+    section.left_margin = Inches(0.48)
+    section.right_margin = Inches(0.48)
+    section.header_distance = Inches(0.2)
+    section.footer_distance = Inches(0.18)
     configure_styles(doc)
     add_footer(section, variant)
 
@@ -393,7 +400,6 @@ def build_cv(variant):
     for job in EXPERIENCE:
         add_role(doc, job["role"], job["company"], job["dates"], job[variant])
 
-    doc.add_page_break()
     add_section(doc, "Selected Projects")
     for project in PROJECTS[variant]:
         add_project(doc, project)

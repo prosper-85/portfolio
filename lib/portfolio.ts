@@ -27,6 +27,11 @@ export const siteConfig = {
     username: "prosper-85",
     url: "https://github.com/prosper-85",
   },
+  cv: {
+    label: "Download CV",
+    href: "/cv/Saheed_Prosper_Tobi_Web_Frontend_Engineer_CV.pdf",
+    fileName: "Saheed_Prosper_Tobi_Web_Frontend_Engineer_CV.pdf",
+  },
   linkedin: "https://linkedin.com/in/oluwatobi3685",
   x: "https://x.com/gndptb",
 };
