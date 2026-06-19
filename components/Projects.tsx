@@ -9,11 +9,16 @@ export default function Projects() {
         <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
           <div className="max-w-3xl">
             <p className="text-sm font-semibold uppercase tracking-[0.24em] text-cyan-300">
-              Selected Work
+              Projects
             </p>
             <h2 className="mt-4 text-4xl font-semibold tracking-normal text-white sm:text-5xl">
-              Product work shaped around trust, speed, and clarity.
+              Shipped mobile apps and live web platforms.
             </h2>
+            <p className="mt-5 max-w-2xl text-base leading-8 text-zinc-400">
+              A focused look at payment, mobility, and enterprise products I
+              have contributed to across React Native, React, Next.js, and
+              full-stack product delivery.
+            </p>
           </div>
 
           <a

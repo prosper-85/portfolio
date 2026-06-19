@@ -17,7 +17,7 @@ export const siteConfig = {
   headline:
     "Frontend lead building scalable web, mobile, fintech, and enterprise products.",
   description:
-    "Frontend Lead and Full-Stack Engineer with 5+ years of experience across React, Next.js, React Native, and Node.js product systems.",
+    "Frontend Lead and Full-Stack Engineer building production web, mobile, fintech, and enterprise product systems with React, Next.js, React Native, and Node.js.",
   location: "Lagos, Nigeria",
   availability: "Available for relocation",
   email: "prosper8890@gmail.com",
@@ -39,6 +39,7 @@ export const siteConfig = {
 export const navItems = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
+  { href: "/#projects", label: "Projects" },
   { href: "/tech", label: "Stack" },
   { href: "/contact", label: "Contact" },
 ];
@@ -65,7 +66,7 @@ export const strengths = [
 ];
 
 export const metrics = [
-  { value: "5+", label: "Years building production apps" },
+  { value: "Web + Mobile", label: "Production product delivery" },
   { value: "Lead", label: "Frontend engineering experience" },
   { value: "Yes", label: "Available for relocation" },
 ];

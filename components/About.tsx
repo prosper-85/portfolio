@@ -18,11 +18,11 @@ export default function About() {
 
           <div className="space-y-6 text-base leading-8 text-zinc-300 sm:text-lg">
             <p>
-              I am a Frontend Lead and Full-Stack Engineer with 5+ years of
-              experience building scalable fintech, mobility, and enterprise
-              applications. My work sits closest to the product layer: reliable
-              interfaces, reusable UI systems, API integration, and performance
-              work that holds up after launch.
+              I am a Frontend Lead and Full-Stack Engineer focused on scalable
+              fintech, mobility, and enterprise applications. My work sits
+              closest to the product layer: reliable interfaces, reusable UI
+              systems, API integration, and performance work that holds up
+              after launch.
             </p>
             <p>
               My current focus is React, Next.js, React Native, and backend

@@ -1,6 +1,6 @@
 "use client";
 
-import { Home, Layers, Mail, User } from "lucide-react";
+import { FolderGit2, Home, Layers, Mail, User } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
@@ -9,6 +9,7 @@ import { navItems } from "@/lib/portfolio";
 const navIcons: Record<string, ReactNode> = {
   "/": <Home size={18} aria-hidden="true" />,
   "/about": <User size={18} aria-hidden="true" />,
+  "/#projects": <FolderGit2 size={18} aria-hidden="true" />,
   "/tech": <Layers size={18} aria-hidden="true" />,
   "/contact": <Mail size={18} aria-hidden="true" />,
 };
@@ -29,7 +30,11 @@ export default function Navbar() {
             icon={navIcons[item.href]}
             label={item.label}
             isActive={
-              item.href === "/" ? pathname === "/" : pathname.startsWith(item.href)
+              item.href === "/"
+                ? pathname === "/"
+                : item.href.includes("#")
+                  ? false
+                  : pathname.startsWith(item.href)
             }
           />
         ))}
